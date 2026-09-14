@@ -65,7 +65,8 @@ export default function Console() {
     if (!token) return;
     let stopped = false; let socket: WebSocket | undefined; let timer: ReturnType<typeof setTimeout>;
     const connect = () => {
-      socket = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/api/v1/events`);
+      const wsOrigin = process.env.NEXT_PUBLIC_WS_URL || `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}`;
+      socket = new WebSocket(`${wsOrigin.replace(/\/+$/, "")}/api/v1/events`);
       socket.onopen = () => socket?.send(JSON.stringify({token}));
       socket.onmessage = (message) => { const event = JSON.parse(message.data); setLive(true); if (!["ping", "connected"].includes(event.type)) { setEvents(old => [event, ...old].slice(0, 6)); void refresh(); } };
       socket.onclose = () => { setLive(false); if (!stopped) timer = setTimeout(connect, 4000); };
