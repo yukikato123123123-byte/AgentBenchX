@@ -91,6 +91,7 @@ class GitRepositoryManager:
 
 
     def clone(self, source_id: str, url: str) -> Path:
+        print("DEBUG CLONE URL:", repr(url))
         path = self.path(source_id)
         self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
