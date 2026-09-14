@@ -71,11 +71,14 @@ class GitRepositoryManager:
                 check=True,
             )
             return result.stdout if binary else result.stdout.decode().strip()
-        except (subprocess.SubprocessError, OSError) as exc:
-            # Do not expose subprocess stderr: server credentials/config may appear there.
+        except subprocess.CalledProcessError as exc:
+            stderr = (exc.stderr or b"").decode(errors="replace").strip()
             raise SourceError(
-                "Git operation failed; check server SSH configuration, access and network"
+                f"Git operation failed: {stderr[:1000]}"
             ) from exc
+        except (subprocess.SubprocessError, OSError) as exc:
+            raise SourceError(f"Git operation failed: {exc}") from exc
+
 
     def clone(self, source_id: str, url: str) -> Path:
         path = self.path(source_id)
