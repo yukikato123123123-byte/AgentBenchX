@@ -51,10 +51,16 @@ class GitRepositoryManager:
 
     def run(self, *args: str, cwd: Path | None = None, binary: bool = False):
         env = {
-                **os.environ,
-                "GIT_TERMINAL_PROMPT": "0",
-                "GIT_LFS_SKIP_SMUDGE": "1",
-            }
+            **os.environ,
+            "GIT_TERMINAL_PROMPT": "0",
+            "GIT_LFS_SKIP_SMUDGE": "1",
+            "GIT_CONFIG_NOSYSTEM": "1",
+            "GIT_CONFIG_GLOBAL": "/dev/null",
+            "GIT_CONFIG_NOSYSTEM": "1",
+        }
+        env.pop("GIT_ASKPASS", None)
+        env.pop("SSH_ASKPASS", None)
+        env.pop("GIT_CREDENTIAL_HELPER", None)
         env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes -o StrictHostKeyChecking=yes")
         try:
             result = subprocess.run(
