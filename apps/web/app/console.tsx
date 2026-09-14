@@ -7,7 +7,7 @@ import { Activity, ArrowDownToLine, ArrowRight, Box, Check, ChevronRight, Circle
 type Row = { id: string; [key: string]: any }; // JSON records are described by the shared OpenAPI contract.
 type Summary = Record<string, number>;
 const links = [ ["/dashboard", "Overview", LayoutDashboard], ["/agents", "Agents", FileCode2], ["/problem-sources", "Problem sources", GitBranch], ["/problems", "Problem library", Layers], ["/workers", "Workers", Monitor], ["/evaluations", "Evaluations", FlaskConical] ] as const;
-const short = (s: string = "") => s.slice(0, 8);
+const short = (s: string | null | undefined = "") => (s ?? "").slice(0, 8);
 const money = (n: number | null | undefined) => n == null ? "N/A" : `$${n.toFixed(4)}`;
 const duration = (n: number = 0) => `${Math.floor(n / 60)}m ${Math.floor(n % 60)}s`;
 function Badge({ value }: { value: string }) { return <span className={`badge ${(value || "").toLowerCase()}`}>{value?.replaceAll("_", " ") || "—"}</span>; }
