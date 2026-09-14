@@ -94,7 +94,15 @@ class GitRepositoryManager:
         path = self.path(source_id)
         self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
-        self.run("clone", "--bare", "--", url, str(path))
+        self.run(
+            "clone",
+            "--bare",
+            "--config",
+            "credential.helper=",
+            "--",
+            url,
+            str(path),
+        )
         return path
 
     def fetch(self, path: Path):
