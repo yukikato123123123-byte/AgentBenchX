@@ -1,0 +1,9 @@
+# Optional Linux/WSL workaround when Docker bridge egress is unavailable.
+# Changes build networking only; runtime services keep their private Compose network.
+services:
+  api:
+    build:
+      network: host
+  web:
+    build:
+      network: host

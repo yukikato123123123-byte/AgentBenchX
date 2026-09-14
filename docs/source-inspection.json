@@ -1,0 +1,79 @@
+{
+  "commit": "55014c032f9532834cccc780f4d372c90ebcb37f",
+  "branch": "main",
+  "discovered": 29,
+  "categories": {
+    "CODING": 21,
+    "DATABASE": 8
+  },
+  "skipped": [
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3124",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3126",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3128",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3130",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3131",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3133",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3154",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3174",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3175",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3195",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3199",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3201",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3211",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3228",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3236",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3237",
+      "reason": "GIS is out of scope"
+    },
+    {
+      "path": "30_06_2026/xarray-contrib__xarray-spatial-3247",
+      "reason": "GIS is out of scope"
+    }
+  ]
+}

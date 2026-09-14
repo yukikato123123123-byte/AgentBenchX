@@ -1,0 +1,14 @@
+{
+  "problem_id": "41966f8e-be97-4001-8f95-a046e9ad11d8",
+  "problem_version_id": "8e2be30a-7170-4f0f-bfb4-feb5e9e3b376",
+  "commit_sha": "55014c032f9532834cccc780f4d372c90ebcb37f",
+  "problem_path": "13_08_2026/joserfc__flattened-signature-validation",
+  "category": "CODING",
+  "repository_url": "git@github.com:wongfengchen8-cell/NIFUS-bench.git",
+  "test_command": [
+    "bash",
+    "/tests/test.sh"
+  ],
+  "timeout_seconds": 600,
+  "selection_status": "selected, not yet executed on Mac"
+}

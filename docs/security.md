@@ -1,0 +1,13 @@
+# Security boundaries
+
+The central API has no agent/benchmark execution path. Python uploads are syntax-parsed only. Git reads bare repository blobs with fixed argument arrays; repository scripts, solution scripts, build hooks and Dockerfiles are not executed. Untrusted stdout, instruction text and diffs are displayed as text, never HTML. Metadata symlinks are excluded and paths derive from Git trees or server-generated UUIDs.
+
+Administrator endpoints require ADMIN_TOKEN. Worker registration is open to anyone who can reach the existing private server, per the trusted-network model; no bootstrap token or manual approval is required. Each registered worker gets a random bearer token stored only as a digest. Tokens are never placed in WebSocket query strings: the first frame authenticates with the administrator token, within 10 seconds. WebSockets validate the configured browser origin. Frontend credentials live in tab session storage, not build-time variables or repository files. This is a single-administrator development foundation; production needs identity management, rotation/revocation, rate limiting and a hardened reverse proxy.
+
+Default Compose network exposure is loopback. PostgreSQL and Redis remain on a private container network, with local development ports 55432 and 56379. Configure TLS and a firewall before connecting Macs from another computer. Only privileged control-plane operators should have access to the Docker daemon or source cache. Do not mount the server Docker socket into the API or expose it to uploaded agents.
+
+Keep .env, private keys, provider credentials and storage out of Git. The supplied SSH override forwards an agent and public known_hosts only. Do not put credentials in repository URLs, database metadata, worker payloads or logs. Do not disable host key checking. Git host allowlisting limits registered remotes; operational network egress controls are still needed in production.
+
+PostgreSQL rejects updates/deletes to immutable version rows, including direct SQL. There are no mutation APIs for versions. Files use new UUID paths with exclusive creation; users cannot select a server path. File immutability is application-enforced, not WORM filesystem storage. A privileged server operator can still modify disk files; workers must verify agent SHA-256 before execution.
+
+Claims use row locks, expiring leases and ownership tokens. Workers must implement lease-loss termination; database fencing alone does not terminate a partitioned worker. Production sandbox implementation is intentionally deferred to Mac Worker #1. It must isolate processes, credentials, network access, CPU/memory/storage, agent files, and private verifier/reference artifacts. No fallback to host execution is permitted.

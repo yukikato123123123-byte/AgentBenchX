@@ -1,0 +1,9 @@
+# Linux / WSL2 SSH-agent forwarding. Supply trusted public known_hosts via SSH_KNOWN_HOSTS.
+services:
+  api:
+    environment:
+      SSH_AUTH_SOCK: /run/ssh-agent.sock
+      GIT_SSH_COMMAND: ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/run/known_hosts
+    volumes:
+      - ${SSH_AUTH_SOCK:?An SSH agent socket is required}:/run/ssh-agent.sock
+      - ${SSH_KNOWN_HOSTS:?Path to a verified known_hosts file is required}:/run/known_hosts:ro

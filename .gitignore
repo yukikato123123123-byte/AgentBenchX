@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+node_modules/
+.next/
+*.tsbuildinfo
+storage/*
+!storage/.gitkeep
+
+*.egg-info/
+
+.env.worker
+identity.json
+problem_sources/
