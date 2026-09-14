@@ -101,11 +101,10 @@ class GitRepositoryManager:
         logging.warning("DEBUG LS-REMOTE=%s", debug[:200])
 
         self.run(
+            "-c",
+            "credential.helper=",
             "clone",
             "--bare",
-            "--config",
-            "credential.helper=",
-            "--",
             url,
             str(path),
         )
