@@ -50,7 +50,14 @@ class GitRepositoryManager:
         return self.root / "problem_sources" / str(UUID(source_id)) / "repository"
 
     def run(self, *args: str, cwd: Path | None = None, binary: bool = False):
-        env = {**os.environ, "GIT_TERMINAL_PROMPT": "0", "GIT_LFS_SKIP_SMUDGE": "1"}
+        env = {
+                **os.environ,
+                "GIT_TERMINAL_PROMPT": "0",
+                "GIT_LFS_SKIP_SMUDGE": "1",
+                "GIT_CONFIG_NOSYSTEM": "1",
+                "GIT_CONFIG_GLOBAL": "/dev/null",
+                "HOME": "/tmp",
+            }
         env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes -o StrictHostKeyChecking=yes")
         try:
             result = subprocess.run(
