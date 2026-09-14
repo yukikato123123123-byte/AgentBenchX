@@ -95,6 +95,11 @@ class GitRepositoryManager:
         path = self.path(source_id)
         self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
+
+        debug = self.run("ls-remote", url)
+        import logging
+        logging.warning("DEBUG LS-REMOTE=%s", debug[:200])
+
         self.run(
             "clone",
             "--bare",
