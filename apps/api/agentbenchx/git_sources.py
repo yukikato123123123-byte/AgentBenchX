@@ -82,7 +82,7 @@ class GitRepositoryManager:
         except subprocess.CalledProcessError as exc:
             stderr = (exc.stderr or b"").decode(errors="replace").strip()
             raise SourceError(
-                f"Git operation failed: {stderr[:5000]}"
+                f"Git operation failed: {stderr[-3000:]}"
             ) from exc
         except (subprocess.SubprocessError, OSError) as exc:
             raise SourceError(f"Git operation failed: {exc}") from exc
@@ -93,16 +93,16 @@ class GitRepositoryManager:
 
         token = os.getenv("GITHUB_TOKEN")
 
+        logging.warning("DEBUG CLONE URL=%r", url)
+
+        path = self.path(source_id)
+        self.validate_url(url)
+
         if token and "github.com" in url:
             url = url.replace(
                 "https://github.com/",
                 f"https://x-access-token:{token}@github.com/"
             )
-
-        logging.warning("DEBUG CLONE URL=%r", url)
-
-        path = self.path(source_id)
-        self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
 
         import logging
