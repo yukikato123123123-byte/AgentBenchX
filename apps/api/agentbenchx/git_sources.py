@@ -57,6 +57,8 @@ class GitRepositoryManager:
             "GIT_LFS_SKIP_SMUDGE": "1",
             "GIT_CONFIG_NOSYSTEM": "1",
             "GIT_CONFIG_GLOBAL": "/dev/null",
+            "GIT_TRACE": "1",
+            "GIT_CURL_VERBOSE": "1",
         }
         try:
             result = subprocess.run(
