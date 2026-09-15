@@ -89,7 +89,18 @@ class GitRepositoryManager:
 
 
     def clone(self, source_id: str, url: str) -> Path:
-        import logging; logging.warning("DEBUG CLONE URL=%r", url)
+        import logging
+
+        token = os.getenv("GITHUB_TOKEN")
+
+        if token and "github.com" in url:
+            url = url.replace(
+                "https://github.com/",
+                f"https://x-access-token:{token}@github.com/"
+            )
+
+        logging.warning("DEBUG CLONE URL=%r", url)
+
         path = self.path(source_id)
         self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
