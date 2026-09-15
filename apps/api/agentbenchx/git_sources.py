@@ -92,9 +92,14 @@ class GitRepositoryManager:
         self.validate_url(url)
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        debug = self.run("ls-remote", url)
         import logging
-        logging.warning("DEBUG LS-REMOTE=%s", debug[:200])
+        logging.warning("DEBUG URL=%r", url)
+
+        debug = self.run("ls-remote", url)
+        logging.warning("DEBUG LS-REMOTE RESULT=%r", debug[:500])
+
+        config = self.run("config", "--list", "--show-origin")
+        logging.warning("DEBUG GIT CONFIG=%r", config[:1000])
 
         self.run(
             "clone",
