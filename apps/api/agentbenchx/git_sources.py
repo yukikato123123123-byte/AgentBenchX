@@ -119,6 +119,23 @@ class GitRepositoryManager:
         self.run(
             "-C",
             str(path),
+            "remote",
+            "set-url",
+            "origin",
+            url,
+        )
+
+        self.run(
+            "-C",
+            str(path),
+            "config",
+            "--unset-all",
+            "credential.helper",
+        )
+
+        self.run(
+            "-C",
+            str(path),
             "fetch",
             "origin",
             "+refs/heads/*:refs/heads/*",
