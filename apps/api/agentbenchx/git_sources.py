@@ -102,11 +102,26 @@ class GitRepositoryManager:
         logging.warning("DEBUG GIT CONFIG=%r", config[:1000])
 
         self.run(
-            "clone",
+            "init",
             "--bare",
-            "--",
-            url,
             str(path),
+        )
+
+        self.run(
+            "-C",
+            str(path),
+            "remote",
+            "add",
+            "origin",
+            url,
+        )
+
+        self.run(
+            "-C",
+            str(path),
+            "fetch",
+            "origin",
+            "+refs/heads/*:refs/heads/*",
         )
         return path
 
