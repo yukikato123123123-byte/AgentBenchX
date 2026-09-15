@@ -82,7 +82,7 @@ class GitRepositoryManager:
         except subprocess.CalledProcessError as exc:
             stderr = (exc.stderr or b"").decode(errors="replace").strip()
             raise SourceError(
-                f"Git operation failed: {stderr[:1000]}"
+                f"Git operation failed: {stderr[:5000]}"
             ) from exc
         except (subprocess.SubprocessError, OSError) as exc:
             raise SourceError(f"Git operation failed: {exc}") from exc
